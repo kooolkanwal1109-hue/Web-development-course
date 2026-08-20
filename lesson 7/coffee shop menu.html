@@ -1,0 +1,443 @@
+name=coffee-shop-menu.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8B4513 0%, #D2B48C 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .menu-section {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #6F4E37 0%, #8B6F47 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 1.8em;
+        }
+
+        .menu-items {
+            padding: 20px;
+        }
+
+        .menu-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .item-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .item-price {
+            color: #8B4513;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .item-description {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .filters {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 2px solid #8B4513;
+            color: #8B4513;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #8B4513;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            font-size: 0.9em;
+        }
+
+        .special-badge {
+            background: #FF6B6B;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .menu-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>☕ The Brew Haven</h1>
+            <p>Premium Coffee & Delights</p>
+        </header>
+
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterMenu('all')">All</button>
+            <button class="filter-btn" onclick="filterMenu('coffee')">Coffee</button>
+            <button class="filter-btn" onclick="filterMenu('tea')">Tea</button>
+            <button class="filter-btn" onclick="filterMenu('pastries')">Pastries</button>
+        </div>
+
+        <div class="menu-container" id="menuContainer">
+            <!-- Coffee Section -->
+            <div class="menu-section" data-category="coffee">
+                <div class="section-header">
+                    <h2>☕ Hot Coffee</h2>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Espresso</span>
+                            <span class="item-price">$2.50</span>
+                        </div>
+                        <div class="item-description">Rich, bold, and concentrated. Single or double shot.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Cappuccino</span>
+                            <span class="item-price">$4.00</span>
+                        </div>
+                        <div class="item-description">Espresso with steamed milk and velvety foam. Classic Italian style.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Latte</span>
+                            <span class="item-price">$4.50</span>
+                        </div>
+                        <div class="item-description">Smooth espresso with creamy steamed milk. Perfect daily choice.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Americano</span>
+                            <span class="item-price">$3.00</span>
+                        </div>
+                        <div class="item-description">Espresso shots topped with hot water for a smooth finish.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Mocha <span class="special-badge">SPECIAL</span></span>
+                            <span class="item-price">$5.00</span>
+                        </div>
+                        <div class="item-description">Espresso, steamed milk, and rich chocolate. Topped with whipped cream.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cold Coffee Section -->
+            <div class="menu-section" data-category="coffee">
+                <div class="section-header">
+                    <h2>🧊 Cold Coffee</h2>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Iced Espresso</span>
+                            <span class="item-price">$3.00</span>
+                        </div>
+                        <div class="item-description">Chilled espresso over ice. Simple and refreshing.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Iced Latte</span>
+                            <span class="item-price">$4.50</span>
+                        </div>
+                        <div class="item-description">Cold and creamy with espresso and milk over ice.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Cold Brew</span>
+                            <span class="item-price">$3.50</span>
+                        </div>
+                        <div class="item-description">Smooth, naturally sweet cold brew concentrate.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Frappuccino</span>
+                            <span class="item-price">$5.50</span>
+                        </div>
+                        <div class="item-description">Blended coffee with ice, milk, and whipped cream.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tea Section -->
+            <div class="menu-section" data-category="tea">
+                <div class="section-header">
+                    <h2>🍵 Tea Selection</h2>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Green Tea</span>
+                            <span class="item-price">$2.75</span>
+                        </div>
+                        <div class="item-description">Refreshing and antioxidant-rich. Calming experience.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Black Tea</span>
+                            <span class="item-price">$2.75</span>
+                        </div>
+                        <div class="item-description">Classic bold flavor. Perfect morning companion.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Chai Latte</span>
+                            <span class="item-price">$4.00</span>
+                        </div>
+                        <div class="item-description">Spiced tea blend with steamed milk. Warm and aromatic.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Chamomile Tea <span class="special-badge">CALMING</span></span>
+                            <span class="item-price">$2.75</span>
+                        </div>
+                        <div class="item-description">Soothing herbal blend perfect for relaxation.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pastries Section -->
+            <div class="menu-section" data-category="pastries">
+                <div class="section-header">
+                    <h2>🥐 Fresh Pastries</h2>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Croissant</span>
+                            <span class="item-price">$3.50</span>
+                        </div>
+                        <div class="item-description">Buttery, flaky layers. Fresh from our oven daily.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Blueberry Muffin</span>
+                            <span class="item-price">$3.75</span>
+                        </div>
+                        <div class="item-description">Moist and delicious with fresh blueberries.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Chocolate Croissant</span>
+                            <span class="item-price">$4.00</span>
+                        </div>
+                        <div class="item-description">Flaky pastry filled with premium chocolate.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Banana Bread</span>
+                            <span class="item-price">$3.25</span>
+                        </div>
+                        <div class="item-description">Classic favorite. Moist and naturally sweet.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Cheesecake <span class="special-badge">NEW</span></span>
+                            <span class="item-price">$5.50</span>
+                        </div>
+                        <div class="item-description">Creamy New York style cheesecake. Decadent indulgence.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sandwiches Section -->
+            <div class="menu-section" data-category="food">
+                <div class="section-header">
+                    <h2>🥪 Sandwiches & Paninis</h2>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Caprese Panini</span>
+                            <span class="item-price">$7.50</span>
+                        </div>
+                        <div class="item-description">Tomato, mozzarella, and basil on toasted ciabatta.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Turkey & Avocado</span>
+                            <span class="item-price">$8.00</span>
+                        </div>
+                        <div class="item-description">Sliced turkey, creamy avocado, and fresh greens.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Ham & Cheese Croissant</span>
+                            <span class="item-price">$6.50</span>
+                        </div>
+                        <div class="item-description">Premium ham and Swiss cheese on a buttery croissant.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Extras Section -->
+            <div class="menu-section" data-category="extras">
+                <div class="section-header">
+                    <h2>🍰 Extras & Treats</h2>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Whipped Cream</span>
+                            <span class="item-price">+$0.75</span>
+                        </div>
+                        <div class="item-description">Fresh whipped cream topping for any beverage.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Flavored Syrups</span>
+                            <span class="item-price">+$0.50</span>
+                        </div>
+                        <div class="item-description">Vanilla, hazelnut, caramel, or mocha. Add to any drink.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Almond Milk</span>
+                            <span class="item-price">+$0.75</span>
+                        </div>
+                        <div class="item-description">Creamy dairy-free alternative.</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">Donut</span>
+                            <span class="item-price">$2.50</span>
+                        </div>
+                        <div class="item-description">Glazed, chocolate, or filled varieties available.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>📍 123 Coffee Street, Brew City | ☎️ (555) 123-4567 | 📧 hello@brewhaven.com</p>
+            <p>☀️ Hours: Mon-Fri 7AM-8PM | Sat-Sun 8AM-9PM</p>
+            <p>© 2024 The Brew Haven. All rights reserved. ☕</p>
+        </footer>
+    </div>
+
+    <script>
+        function filterMenu(category) {
+            const sections = document.querySelectorAll('.menu-section');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            sections.forEach(section => {
+                if (category === 'all') {
+                    section.style.display = 'block';
+                } else {
+                    if (section.getAttribute('data-category') === category) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
